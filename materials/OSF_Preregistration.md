@@ -6,7 +6,7 @@ Have any data been collected for this study already?
 
 ## 2. Hypothesis
 What's the main question being asked or hypothesis being tested in this study?
-- **H1 (Main Effect):** Higher levels of AI involvement disclosure (None > AI-assisted > AI-generated) will lead to lower perceived source authenticity, consumer trust, and purchase intention.
+- **H1 (Main Effect):** Higher levels of AI involvement disclosure (None > AI-assisted > AI-generated) will lead to lower perceived source authenticity.
 - **H2 (Interaction):** Product type moderates the effect of AI disclosure on perceived authenticity. The negative effect of AI disclosure (vs. no disclosure) will be stronger for experience goods (e.g., facial serum) than for search goods (e.g., USB flash drive).
 - **H3 (Moderated Mediation):** The interactive effect of AI disclosure and product type on purchase intention is mediated by perceived source authenticity.
 
