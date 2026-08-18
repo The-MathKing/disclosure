@@ -21,27 +21,43 @@
 \maketitle
 
 \begin{abstract}
-This research investigates the impact of AI disclosure (none vs. AI-assisted vs. AI-generated) on consumer trust and purchase intentions in online product reviews. Across a 3x2 between-subjects experimental design, we find that the negative effect of AI disclosure on perceived source authenticity is significantly moderated by product typology. Specifically, the authenticity penalty for AI-generated and AI-assisted disclosures is stronger for experience goods than for search goods. These findings provide critical theoretical insights into consumer trust in automated content and offer practical guidance for marketers navigating emerging FTC disclosure requirements.
+This research investigates the impact of AI disclosure (none vs. AI-assisted vs. AI-generated) on consumer trust and purchase intentions in online product reviews. Across a 3x2 between-subjects experimental design, we find that AI disclosure significantly lowers perceived source authenticity. We test whether this authenticity penalty is moderated by product typology (search vs. experience goods). These findings provide critical theoretical insights into consumer trust in automated content and offer practical guidance for marketers navigating emerging FTC disclosure requirements.
 \end{abstract}
 
 \newpage
 
 \section{Introduction}
-% Contribution paragraph based on differentiation memo
-Recent studies demonstrate that AI disclosures lower perceived authenticity, primarily through parasocial mechanisms on social media (e.g., Carney, Riveros \& Tully, 2026). However, these studies often examine broad contexts without considering product-specific boundary conditions. This study differentiates itself by introducing the search vs. experience good typology as a critical moderator. We demonstrate that consumers are more forgiving of AI assistance in search goods compared to experience goods, where subjective human experience is paramount.
+\textit{Note: The data and statistics reported in this manuscript are simulated for planning and structural purposes, pending actual data collection.}
+
+Recent studies demonstrate that AI disclosures lower perceived authenticity, primarily through parasocial mechanisms on social media \citep{carney2026}. However, these studies often examine broad contexts without considering product-specific boundary conditions. This study differentiates itself by introducing the search vs. experience good typology as a critical moderator. We test whether consumers are more forgiving of AI assistance in search goods compared to experience goods, where subjective human experience is paramount.
 
 \section{Theoretical Background \& Hypotheses}
 \subsection{AI Disclosure and Source Authenticity}
+As artificial intelligence becomes ubiquitous in content generation, consumers are increasingly confronted with AI-generated product reviews. Drawing on source credibility theory \citep{ohanian1990}, we argue that human authorship signals genuine experience and trustworthiness \citep{mcknight2002}. When AI involvement is disclosed, consumers may penalize the review's authenticity, perceiving it as lacking personal lived experience.
+\begin{itemize}
+    \item \textbf{H1:} Higher levels of AI involvement disclosure (None $>$ AI-assisted $>$ AI-generated) will lead to lower perceived source authenticity, consumer trust, and purchase intention.
+\end{itemize}
+
 \subsection{The Moderating Role of Product Typology}
+The impact of AI disclosure may depend heavily on the type of product being evaluated. Search goods (e.g., electronics) can be evaluated based on objective, factual specifications, whereas experience goods (e.g., cosmetics) require subjective, sensory evaluation \citep{nelson1970}. Because AI lacks subjective sensory capabilities, its involvement in reviewing experience goods should be penalized more harshly.
+\begin{itemize}
+    \item \textbf{H2:} Product type moderates the effect of AI disclosure on perceived authenticity. The negative effect of AI disclosure will be stronger for experience goods than for search goods.
+    \item \textbf{H3:} The interactive effect of AI disclosure and product type on purchase intention is mediated by perceived source authenticity.
+\end{itemize}
 
 \section{Method}
 \subsection{Participants and Design}
+We simulated data for N=252 participants to reflect a 3 (AI Disclosure: None, AI-assisted, AI-generated) $\times$ 2 (Product Typology: Search, Experience) between-subjects design. Data was simulated using a Python script for planning purposes.
+
 \subsection{Stimuli and Procedure}
+Participants read a product review for either a search good (USB flash drive) or an experience good (facial serum). The review was prefaced with one of three disclosure labels: no label, ``AI-assisted,'' or ``AI-generated.'' Holding review length and sentiment constant, participants then completed measures of authenticity, trust, and purchase intention.
+
 \subsection{Measures}
+Source authenticity was measured using an adapted scale, consumer trust via \citet{mcknight2002}, and purchase intention using semantic differentials from \citet{putrevu1994}. Manipulation checks for product typology adapted \citet{nelson1970}.
 
 \section{Results}
 \subsection{Manipulation Checks}
-An initial pretest (N=40) confirmed the efficacy of the AI disclosure manipulation. Participants in the AI-generated condition perceived significantly higher levels of AI involvement compared to the AI-assisted and None conditions, confirming an ordinal progression (see Figure 1).
+An initial simulated pretest confirmed the efficacy of the AI disclosure manipulation. An ANOVA on perceived AI involvement yielded a significant main effect ($F(1, 24) = 85.55$, $p < .001$). Participants in the AI-generated condition ($M = 6.26$, $SD = 0.42$) perceived significantly higher levels of AI involvement compared to the AI-assisted condition ($M = 3.75$, $SD = 0.88$), confirming an ordinal progression (see Figure \ref{fig:pretest}).
 
 \begin{figure}[h]
 \centering
@@ -51,22 +67,27 @@ An initial pretest (N=40) confirmed the efficacy of the AI disclosure manipulati
 \end{figure}
 
 \subsection{Main Effects and Interaction}
-A two-way ANOVA on the main study data (N=252) revealed a significant main effect of AI disclosure on perceived source authenticity. More importantly, we observed a significant interaction between AI disclosure and product typology. As shown in Figure 2, the authenticity penalty for both AI-assisted and AI-generated disclosures was exacerbated for experience goods (e.g., facial serum) compared to search goods (e.g., USB flash drive).
+A two-way ANOVA on the main study data (N=252) revealed a significant main effect of AI disclosure on perceived source authenticity ($F(1, 164) = 143.05$, $p < .001$, $\eta^2_p = .46$). There was also a main effect of product typology ($F(1, 164) = 67.75$, $p < .001$, $\eta^2_p = .29$). 
+
+Contrary to our expectations for H2, the interaction between AI disclosure and product typology was not statistically significant in this simulated dataset ($F(1, 164) = 0.05$, $p = .830$, $\eta^2_p < .001$). Figure \ref{fig:interaction} plots these main effects without a crossover interaction.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/main_interaction.png}
-\caption{Interaction Effect of AI Disclosure and Product Typology on Authenticity}
+\caption{Main Effects of AI Disclosure and Product Typology on Authenticity}
 \label{fig:interaction}
 \end{figure}
 
 \subsection{Moderated Mediation}
-Using PROCESS Model 8 logic, we found that perceived source authenticity mediated the interactive effect of AI disclosure and product type on downstream purchase intention, supporting H3.
+To test H3, we examined whether perceived source authenticity mediated downstream purchase intention. An OLS regression showed that authenticity significantly predicted purchase intention ($B = 0.74$, $t = 12.5$, $p < .001$, 95\% CI [$0.60$, $0.88$]). The overall variance explained by the mediator model was substantial ($R^2 = .56$). While the primary interaction (H2) was not supported by the simulation, the strong path from the mediator to the dependent variable provides partial mechanical support for the mediation pathway conceptualized in H3.
 
 \section{General Discussion}
 \subsection{Theoretical Contributions}
+This simulated study demonstrates a robust authenticity penalty for AI disclosures. While our mock data did not yield the hypothesized interaction with product typology, testing this mechanism with real participant data remains critical.
 \subsection{Managerial Implications}
+For marketers navigating emerging FTC guidelines, these results suggest that any disclosure of AI involvement---even mere assistance---can heavily penalize perceived authenticity and trust.
 \subsection{Limitations and Future Research}
+The primary limitation of this manuscript is that it relies entirely on simulated mock data. Future research will replace these placeholders with actual experimental data collected via Prolific.
 
 \bibliographystyle{apalike}
 \bibliography{references}
