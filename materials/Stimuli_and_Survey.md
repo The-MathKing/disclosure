@@ -13,7 +13,7 @@ We manipulated two factors: Product Type (Search Good vs. Experience Good) and A
 ### AI Disclosure Manipulations
 Each base review will be displayed with one of the following disclosure tags at the top:
 - **Condition 1 (None):** *No tag presented.*
-- **Condition 2 (AI-Assisted):** `[AI-assisted: Grammar and clarity corrected by AI]`
+- **Condition 2 (AI-Assisted):** `[AI-assisted: Drafted jointly with AI assistance for structure and tone]`
 - **Condition 3 (AI-Generated):** `[AI-generated: Drafted by AI from reviewer's notes]`
 
 ---

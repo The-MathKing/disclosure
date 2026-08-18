@@ -34,7 +34,7 @@ Describe exactly how outliers will be defined and handled, and your precise rule
 
 ## 7. Sample Size
 How many observations will be collected or what will determine sample size? No need to justify decision, but be precise about exactly how the number will be determined.
-Target sample size is N = 252 (42 per condition). We will recruit up to 300 gross participants on Prolific to account for exclusions due to failed attention checks.
+Target sample size is N = 300 (50 per condition). We will recruit up to 350 gross participants on Prolific to account for exclusions due to failed attention checks. This represents an increase over our initial N=252 target to ensure adequate power for detecting the potentially smaller contrast between 'No AI' and 'AI-Assisted' disclosures in our moderated mediation model.
 
 ## 8. Other
 Anything else you would like to pre-register?
