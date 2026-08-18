@@ -28,13 +28,39 @@ aov_table_main = sm.stats.anova_lm(anova_main, typ=2)
 aov_table_main['eta_sq'] = aov_table_main['sum_sq'] / (aov_table_main['sum_sq'] + aov_table_main.loc['Residual', 'sum_sq'])
 print(aov_table_main)
 
-print("\n--- MAIN STUDY: MEDIATION (OLS step) ---")
-# M on X
-mod_m = ols('authenticity ~ C(disclosure) * C(product)', data=main).fit()
-print("R-squared for M:", mod_m.rsquared)
+print("\n--- MAIN STUDY: MEDIATION (Model 8) ---")
+# Create dummy variables for Disclosure
+main['D_Assisted'] = (main['disclosure'] == 'Assisted').astype(int)
+main['D_Generated'] = (main['disclosure'] == 'Generated').astype(int)
+main['W'] = (main['product'] == 'Experience').astype(int)
 
-# Y on X + M
-mod_y = ols('purchase_intent ~ C(disclosure) * C(product) + authenticity', data=main).fit()
-print("Authenticity coefficient on Y:", mod_y.params['authenticity'])
-print("p-value:", mod_y.pvalues['authenticity'])
-print("Confidence interval:", mod_y.conf_int().loc['authenticity'])
+# Model M (Authenticity)
+mod_m = ols('authenticity ~ D_Assisted + D_Generated + W + D_Assisted:W + D_Generated:W', data=main).fit()
+print("Model M Summary:")
+print(mod_m.summary())
+
+# Model Y (Purchase Intention)
+mod_y = ols('purchase_intent ~ D_Assisted + D_Generated + W + D_Assisted:W + D_Generated:W + authenticity', data=main).fit()
+print("\nModel Y Summary:")
+print(mod_y.summary())
+
+# Index of Moderated Mediation (IMM) for Generated vs No_AI
+a3 = mod_m.params['D_Generated:W']
+b = mod_y.params['authenticity']
+imm = a3 * b
+print(f"\nIndex of Moderated Mediation (Generated vs No_AI): {imm:.4f}")
+
+# Simple bootstrap for IMM CI
+import numpy as np
+np.random.seed(42)
+n_boot = 5000
+imm_boot = []
+for _ in range(n_boot):
+    idx = np.random.choice(main.index, size=len(main), replace=True)
+    sample = main.loc[idx]
+    m_boot = ols('authenticity ~ D_Assisted + D_Generated + W + D_Assisted:W + D_Generated:W', data=sample).fit()
+    y_boot = ols('purchase_intent ~ D_Assisted + D_Generated + W + D_Assisted:W + D_Generated:W + authenticity', data=sample).fit()
+    imm_boot.append(m_boot.params['D_Generated:W'] * y_boot.params['authenticity'])
+
+ci_lower, ci_upper = np.percentile(imm_boot, [2.5, 97.5])
+print(f"95% Bootstrapped CI for IMM: [{ci_lower:.4f}, {ci_upper:.4f}]")

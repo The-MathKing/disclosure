@@ -8,11 +8,11 @@ os.makedirs('../manuscript/figures', exist_ok=True)
 
 # 1. Pretest Mock Data & Figure
 np.random.seed(42)
-n_pretest = 40
-ai_disclosure = np.array(['None', 'Assisted', 'Generated'] * 14)[:n_pretest]
+n_pretest = 42
+ai_disclosure = np.array(['No_AI', 'Assisted', 'Generated'] * 14)[:n_pretest]
 ai_scores = []
 for d in ai_disclosure:
-    if d == 'None':
+    if d == 'No_AI':
         ai_scores.append(np.random.normal(1.5, 0.5))
     elif d == 'Assisted':
         ai_scores.append(np.random.normal(4.0, 0.8))
@@ -24,7 +24,7 @@ pretest_df = pd.DataFrame({'id': range(1, n_pretest+1), 'ai_disclosure': ai_disc
 pretest_df.to_csv('../data/pretest_data.csv', index=False)
 
 plt.figure(figsize=(6, 4))
-plt.boxplot([ai_scores[ai_disclosure == 'None'], ai_scores[ai_disclosure == 'Assisted'], ai_scores[ai_disclosure == 'Generated']], tick_labels=['None', 'Assisted', 'Generated'])
+plt.boxplot([ai_scores[ai_disclosure == 'No_AI'], ai_scores[ai_disclosure == 'Assisted'], ai_scores[ai_disclosure == 'Generated']], tick_labels=['No AI', 'Assisted', 'Generated'])
 plt.title('AI Disclosure Manipulation Check')
 plt.ylabel('Perceived AI Involvement (1-7)')
 plt.savefig('../manuscript/figures/pretest_ai_check.png')
@@ -32,24 +32,26 @@ plt.close()
 
 # 2. Main Mock Data & Figure
 n_main = 252
-disclosure_levels = ['None', 'Assisted', 'Generated']
+disclosure_levels = ['No_AI', 'Assisted', 'Generated']
 product_levels = ['Search', 'Experience']
 main_disclosure = np.repeat(disclosure_levels, n_main // 3)
 main_product = np.tile(np.repeat(product_levels, n_main // 6), 3)
 
 authenticity = []
 for d, p in zip(main_disclosure, main_product):
-    base = 5.0
-    if d == 'Assisted':
-        base = 4.0
-    elif d == 'Generated':
-        base = 2.5
-        
-    if p == 'Experience':
+    # Base authenticity is high for No_AI
+    base = 5.5
+    if p == 'Search':
         if d == 'Assisted':
-            base = 3.0
+            base = 4.5
         elif d == 'Generated':
-            base = 1.5
+            base = 3.5
+    else: # Experience
+        if d == 'Assisted':
+            base = 3.5
+        elif d == 'Generated':
+            base = 2.0
+            
     authenticity.append(base + np.random.normal(0, 0.8))
 
 authenticity = np.clip(authenticity, 1, 7)
@@ -62,7 +64,7 @@ main_df.to_csv('../data/main_data.csv', index=False)
 # Interaction Plot
 means = main_df.groupby(['disclosure', 'product'])['authenticity'].mean().unstack()
 # Reorder disclosure
-means = means.loc[['None', 'Assisted', 'Generated']]
+means = means.loc[['No_AI', 'Assisted', 'Generated']]
 
 plt.figure(figsize=(6, 4))
 plt.plot(means.index, means['Search'], marker='o', label='Search Good', color='blue')
